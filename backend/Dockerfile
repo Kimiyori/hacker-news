@@ -2,7 +2,7 @@ FROM node:latest
 
 WORKDIR /backend
 
-COPY ./package*.json .
+COPY ./package*.json ./
 
 ENV PATH /app/node_modules/.bin:$PATH
 

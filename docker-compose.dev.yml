@@ -1,7 +1,7 @@
 services:
   test_backend:
     build: ./backend
-    command: bash -c " npm run test-exit"
+    command: bash -c " npm run test"
     working_dir: /backend
   lint_backend:
     build: ./backend
