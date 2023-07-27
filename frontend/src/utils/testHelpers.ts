@@ -11,7 +11,7 @@ export const mockPost = () => {
     kids: faker.helpers.multiple(faker.number.int, { count: faker.number.int({ max: 20 }) }),
   };
 };
-export const mockPosts = (count: number = 20) => {
+export const mockPosts = (count = 20) => {
   return faker.helpers.multiple(mockPost, { count: count });
 };
 export const mockComment = () => {
@@ -24,6 +24,6 @@ export const mockComment = () => {
     time: convertToMs(faker.date.past().getTime()),
   };
 };
-export const mockComments = (count: number = 20) => {
+export const mockComments = (count = 20) => {
   return faker.helpers.multiple(mockComment, { count: faker.number.int({ min: 1, max: count }) });
 };

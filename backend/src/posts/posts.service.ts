@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { HttpException, Injectable } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
-import { PostEntity } from './entities/post.entity';
+import { PostCommentsProps, PostEntity } from 'posts/entities/post.entity';
 
 @Injectable()
 export class PostsService {
@@ -26,29 +26,21 @@ export class PostsService {
     );
     return data;
   };
-  async findPage(
-    page: number,
-  ): Promise<Omit<PostEntity, 'descendants' | 'url' | 'type'>[]> {
-    const listPosts = await this.fetchData<number[]>(
-      `https://hacker-news.firebaseio.com/v0/newstories.json`,
-    );
+  async findPage(page: number): Promise<Omit<PostEntity, 'descendants' | 'url' | 'type' | 'kids'>[]> {
+    const listPosts = await this.fetchData<number[]>(`https://hacker-news.firebaseio.com/v0/newstories.json`);
     const data = await Promise.all(
       listPosts
         .slice((page - 1) * 100, page * 100)
-        .map((id) =>
-          this.fetchData<PostEntity>(
-            `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
-          ),
-        ),
+        .map((id) => this.fetchData<PostEntity>(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)),
     );
     return data.reduce((acc, curr) => {
-      const { descendants, url, type, ...keep_data } = curr;
+      const { descendants, url, type, kids, ...keep_data } = curr;
       acc.push(keep_data);
       return acc;
     }, []);
   }
-  async findPost(id: number): Promise<PostEntity> {
-    const post = await this.fetchData<PostEntity>(
+  async findItem(id: number): Promise<PostEntity | PostCommentsProps> {
+    const post = await this.fetchData<PostEntity | PostCommentsProps>(
       `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
     );
     return post;

@@ -1,23 +1,20 @@
-import { ApiProperty } from '@nestjs/swagger';
-export class PostEntity {
+export type PostEntity = {
   by: string;
   descendants: number;
   id: number;
+  kids?: number[];
   score: number;
   time: number;
   title: string;
   type: string;
   url?: string;
-}
-export class PostCommentsProps {
+};
+export type PostCommentsProps = {
   by: string;
   id: number;
-  kids: number[];
+  kids?: number[];
   parent: number;
   text: string;
   time: number;
-}
-export class PostCommentsEntity {
-  @ApiProperty()
-  commentsIds: number[];
-}
+  type: string;
+};

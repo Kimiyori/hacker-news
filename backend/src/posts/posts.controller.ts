@@ -11,6 +11,6 @@ export class PostsController {
   }
   @Get('item/:id')
   findPost(@Param('id') id: number) {
-    return this.postsService.findPost(id);
+    return this.postsService.findItem(id);
   }
 }
