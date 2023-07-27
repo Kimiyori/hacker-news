@@ -1,4 +1,4 @@
-const convertToMs = (unitTime: number) => {
+export const convertToMs = (unitTime: number) => {
   return Math.floor(unitTime / 1000);
 };
 
@@ -24,4 +24,13 @@ export const time2TimeAgo = (time: number) => {
   if (seconds > 60) {
     return Math.floor(seconds / 60) + ' minutes ago';
   }
+};
+
+export const handlePostTime = (time: number) => {
+  return new Date(time * 1000).toLocaleDateString('en-EN', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 };

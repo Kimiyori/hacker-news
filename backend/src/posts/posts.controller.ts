@@ -9,4 +9,8 @@ export class PostsController {
   findPage(@Param('page') page: number) {
     return this.postsService.findPage(page);
   }
+  @Get('item/:id')
+  findPost(@Param('id') id: number) {
+    return this.postsService.findPost(id);
+  }
 }

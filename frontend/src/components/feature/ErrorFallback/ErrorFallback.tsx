@@ -1,18 +1,8 @@
 import { Box, Button, Typography, styled } from '@mui/material';
+import { FC } from 'react';
 import { FallbackProps } from 'react-error-boundary';
 
-const StyledBox = styled(Box)({
-  position: 'absolute',
-  left: '50%',
-  top: '50%',
-  transform: 'translate(-50%,-50%)',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '1rem',
-});
-
-const Fallback = ({ error, resetErrorBoundary }: FallbackProps) => {
+const Fallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
   return (
     <StyledBox>
       <Typography variant="h3" color="text.secondary">
@@ -26,3 +16,14 @@ const Fallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   );
 };
 export default Fallback;
+
+const StyledBox = styled(Box)({
+  position: 'absolute',
+  left: '50%',
+  top: '50%',
+  transform: 'translate(-50%,-50%)',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '1rem',
+});

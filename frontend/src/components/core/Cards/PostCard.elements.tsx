@@ -4,6 +4,8 @@ import Typography, { TypographyProps } from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
 export const StyledCard = styled(Card)<CardProps>(({ theme }) => ({
+  'transition': 'transform .2s',
+  ':hover': { transform: 'scale(1.05)' },
   [theme.breakpoints.down('md')]: {
     width: '100%',
   },

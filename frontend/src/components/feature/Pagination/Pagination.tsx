@@ -1,10 +1,11 @@
 import { StyledPaginationItem, StyledStackPagination } from 'components/feature/Pagination/Pagination.elements';
 import { Pagination } from '@mui/material';
 import usePagination from 'hooks/usePagination';
+import { FC } from 'react';
 
 export const paginationCount = 5;
 
-const PaginationRounded = () => {
+const PaginationRounded: FC = () => {
   const { currentPage, changePage } = usePagination();
   return (
     <StyledStackPagination spacing={2}>

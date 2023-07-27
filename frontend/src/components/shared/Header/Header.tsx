@@ -1,30 +1,31 @@
 /* eslint-disable react/display-name */
 import AppBar, { AppBarProps } from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { IoNewspaperOutline } from 'react-icons/io5';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@mui/material/Link';
+import { FC } from 'react';
 
-const Header = () => {
+const Header: FC = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <StyledHeaderBox>
       <StyledHeader position="static">
         <Toolbar variant="dense">
           <IconButton edge="start" color="inherit" sx={{ mr: 2 }}>
-            <Link component={RouterLink} to="/">
-              <IoNewspaperOutline title="HeaderIcon" />
-            </Link>
+            <NewspaperIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit" component="div">
-            Hacker News
-          </Typography>
+          <Link sx={{ textDecoration: 'none' }} component={RouterLink} to="/">
+            <Typography variant="h6" color="inherit">
+              Hacker News
+            </Typography>
+          </Link>
         </Toolbar>
       </StyledHeader>
-    </Box>
+    </StyledHeaderBox>
   );
 };
 
@@ -34,3 +35,9 @@ const StyledHeader = styled(AppBar)<AppBarProps>({
   height: '60px',
   justifyContent: 'center',
 });
+const StyledHeaderBox = styled(Box)<BoxProps>(({ theme }) => ({
+  flexGrow: 1,
+  [theme.breakpoints.up('md')]: {
+    marginBottom: 10,
+  },
+}));

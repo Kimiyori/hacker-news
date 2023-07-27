@@ -4,7 +4,7 @@ import PostsListSkeleton from 'components/shared/PostList/Post.List.skeleton';
 import PaginationRounded from 'components/feature/Pagination/Pagination';
 import { refreshDataToggle } from 'store/postList';
 import { useSetAtom } from 'jotai';
-import { StyledButton, StyledContainer } from './Posts.elements';
+import { StyledButton, StyledContainer } from 'pages/Posts/Posts.elements';
 import { ErrorBoundary } from 'react-error-boundary';
 import Fallback from 'components/feature/ErrorFallback/ErrorFallback';
 import { Box, Stack } from '@mui/material';

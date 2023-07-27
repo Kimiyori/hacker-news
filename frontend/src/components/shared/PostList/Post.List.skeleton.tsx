@@ -1,6 +1,7 @@
 import { Skeleton, SkeletonProps, styled } from '@mui/material';
+import { FC } from 'react';
 
-const PostsListSkeleton = () => {
+const PostsListSkeleton: FC = () => {
   return (
     <>
       {Array.from(new Array(18)).map((_, index) => (

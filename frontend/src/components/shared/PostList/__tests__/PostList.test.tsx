@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
-import PostsList from '../PostList';
+import PostsList from 'components/shared/PostList/PostList';
 import { setupServer } from 'msw/node';
 import { rest } from 'msw';
 import { mockPosts } from 'utils/testHelpers';
+import { BrowserRouter } from 'react-router-dom';
 const server = setupServer();
 
 beforeAll(() => server.listen());
@@ -17,7 +18,7 @@ describe('rendering', () => {
         return res(ctx.json(mockPosts()));
       }),
     );
-    render(<PostsList />);
+    render(<PostsList />, { wrapper: BrowserRouter });
     expect(await screen.findAllByText(/Author:/i)).toHaveLength(20);
   });
 });

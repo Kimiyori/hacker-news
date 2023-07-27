@@ -6,6 +6,9 @@ services:
     working_dir: /backend
     volumes:
       - ./backend:/backend
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
     ports:
       - 8000:8000
     restart: on-failure

@@ -30,6 +30,7 @@ module.exports = {
     'testing-library/prefer-presence-queries': 'error',
     'testing-library/prefer-screen-queries': 'error',
     'testing-library/prefer-wait-for': 'error',
+    'no-console': 'off',
   },
   overrides: [
     {

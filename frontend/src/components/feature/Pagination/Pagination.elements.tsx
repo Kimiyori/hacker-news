@@ -1,5 +1,4 @@
 import { PaginationItem, PaginationItemProps, styled, alpha } from '@mui/material';
-
 import Stack, { StackProps } from '@mui/material/Stack';
 
 export const StyledStackPagination = styled(Stack)<StackProps>(({ theme }) => ({

@@ -26,7 +26,9 @@ export class PostsService {
     );
     return data;
   };
-  async findPage(page: number): Promise<PostEntity[]> {
+  async findPage(
+    page: number,
+  ): Promise<Omit<PostEntity, 'descendants' | 'url' | 'type'>[]> {
     const listPosts = await this.fetchData<number[]>(
       `https://hacker-news.firebaseio.com/v0/newstories.json`,
     );
@@ -39,6 +41,16 @@ export class PostsService {
           ),
         ),
     );
-    return data;
+    return data.reduce((acc, curr) => {
+      const { descendants, url, type, ...keep_data } = curr;
+      acc.push(keep_data);
+      return acc;
+    }, []);
+  }
+  async findPost(id: number): Promise<PostEntity> {
+    const post = await this.fetchData<PostEntity>(
+      `https://hacker-news.firebaseio.com/v0/item/${id}.json`,
+    );
+    return post;
   }
 }
