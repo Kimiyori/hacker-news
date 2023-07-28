@@ -4,16 +4,18 @@ import PostsListSkeleton from 'components/shared/PostList/Post.List.skeleton';
 import PaginationRounded from 'components/feature/Pagination/Pagination';
 import { refreshDataToggle } from 'store/postList';
 import { useSetAtom } from 'jotai';
-import { StyledButton, StyledContainer } from 'pages/Posts/Posts.elements';
+import { StyledButton, StyledContainer } from 'pages/Posts/Posts.styles';
 import { ErrorBoundary } from 'react-error-boundary';
 import Fallback from 'components/feature/ErrorFallback/ErrorFallback';
 import { Box, Stack } from '@mui/material';
+import usePagination, { handleCorrentPage } from 'hooks/usePagination';
 
 const PostsListPage = () => {
   const updateNews = useSetAtom(refreshDataToggle);
+  const { currentPage, changePage } = usePagination();
   return (
     <StyledContainer>
-      <ErrorBoundary FallbackComponent={Fallback} onReset={() => updateNews(Math.random())}>
+      <ErrorBoundary FallbackComponent={Fallback} onReset={() => changePage(handleCorrentPage(currentPage))}>
         <Box>
           <Stack
             data-testid="postsList"

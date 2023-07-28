@@ -1,16 +1,11 @@
 import { Container, Typography } from '@mui/material';
 import { useAtomValue } from 'jotai';
 import { handlePostTime } from 'utils/time';
-import { Link as RouterLink } from 'react-router-dom';
-import {
-  StyledBoxSrapper,
-  StyledLinkPostUrl,
-  StylesBoxMainPostData,
-  UpdateCommentsButton,
-} from 'components/shared/PostInfo/PostInfo.elements';
+import { UpdateCommentsButton } from 'components/shared/PostInfo/PostInfo.elements';
 import CommentList from 'components/feature/CommentsList/CommentList';
 import { postData } from 'store/postItem';
 import { FC } from 'react';
+import { StyledBoxSrapper, StyledLinkPostUrl, StylesBoxMainPostData } from './PostInfo.styles';
 
 const PostInfo: FC = () => {
   const postDataValue = useAtomValue(postData);
@@ -18,7 +13,7 @@ const PostInfo: FC = () => {
     <Container sx={{ color: 'primary.main' }}>
       <StyledBoxSrapper>
         {postDataValue.url && (
-          <StyledLinkPostUrl component={RouterLink} to={postDataValue.url}>
+          <StyledLinkPostUrl url={postDataValue.url}>
             <Typography variant="h1">Link to original post</Typography>
           </StyledLinkPostUrl>
         )}

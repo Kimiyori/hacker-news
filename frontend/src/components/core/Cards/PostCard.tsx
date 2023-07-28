@@ -1,12 +1,11 @@
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import { time2TimeAgo } from 'utils/time';
-import { StyledCard, StyledCardContent, StyledTitle, TimeTypo } from 'components/core/Cards/PostCard.elements';
+import { StyledCard, StyledCardContent, StyledTitle, TimeTypo } from 'components/core/Cards/PostCard.styles';
 import Box from '@mui/material/Box';
-import { Link as RouterLink } from 'react-router-dom';
-import Link from '@mui/material/Link';
 import { useSetAtom } from 'jotai';
 import { postId } from 'store/postItem';
+import StyledLink from '../Link/Link';
 
 type PostCardProps = {
   id: number;
@@ -21,9 +20,9 @@ const PostCard: FC<PostCardProps> = ({ id, title, time, author, rating }) => {
   return (
     <StyledCard data-testid="itemPost">
       <StyledCardContent>
-        <Link sx={{ textDecoration: 'none' }} component={RouterLink} to={`/${id}`} onClick={() => setPostId(id)}>
+        <StyledLink url={`/${id}`} onClick={() => setPostId(id)}>
           <StyledTitle variant="h5">{title}</StyledTitle>
-        </Link>
+        </StyledLink>
         <Typography color="text.secondary">Author: {author}</Typography>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <TimeTypo>{time2TimeAgo(time)}</TimeTypo>

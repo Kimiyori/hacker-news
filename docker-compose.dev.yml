@@ -10,9 +10,6 @@ services:
   test_frontend:
     build: ./frontend
     command:  bash -c " npm run test-exit"
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - WATCHPACK_POLLING=true
     ports:
       - 3000:3000
   lint_frontend:

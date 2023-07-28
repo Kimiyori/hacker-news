@@ -2,13 +2,11 @@
 import AppBar, { AppBarProps } from '@mui/material/AppBar';
 import Box, { BoxProps } from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { styled } from '@mui/material/styles';
-import { Link as RouterLink } from 'react-router-dom';
-import Link from '@mui/material/Link';
 import { FC } from 'react';
+import StyledLink from 'components/core/Link/Link';
 
 const Header: FC = () => {
   return (
@@ -18,11 +16,7 @@ const Header: FC = () => {
           <IconButton edge="start" color="inherit" sx={{ mr: 2 }}>
             <NewspaperIcon />
           </IconButton>
-          <Link sx={{ textDecoration: 'none' }} component={RouterLink} to="/">
-            <Typography variant="h6" color="inherit">
-              Hacker News
-            </Typography>
-          </Link>
+          <StyledLink url="/">Hacker News</StyledLink>
         </Toolbar>
       </StyledHeader>
     </StyledHeaderBox>

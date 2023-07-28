@@ -1,4 +1,4 @@
-import { StyledPaginationItem, StyledStackPagination } from 'components/feature/Pagination/Pagination.elements';
+import { StyledPaginationItem, StyledStackPagination } from 'components/feature/Pagination/Pagination.styles';
 import { Pagination } from '@mui/material';
 import usePagination from 'hooks/usePagination';
 import { FC } from 'react';
@@ -15,7 +15,7 @@ const PaginationRounded: FC = () => {
         variant="outlined"
         shape="rounded"
         renderItem={(item) => <StyledPaginationItem {...item} />}
-        onChange={changePage}
+        onChange={(_, page) => changePage(page)}
         color="primary"
       />
     </StyledStackPagination>

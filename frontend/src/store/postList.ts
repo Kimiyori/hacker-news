@@ -8,11 +8,11 @@ export const refreshDataToggle = atom(Math.random());
 export const [postListData] = atomsWithQuery((get) => ({
   queryKey: ['post', get(postPage).searchParams?.get('page'), get(refreshDataToggle)],
   queryFn: async ({ queryKey: [, page] }): Promise<Omit<postDataProps, 'descendants' | 'url' | 'type'>[]> => {
-    const response = await fetch(`http://localhost:8000/posts/${page || 1}`);
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/posts/${page || 1}`);
     if (response.ok) {
       return await response.json();
     }
-    throw new Error(`status: ${response.status}`);
+    throw new Error(`${response.statusText}`);
   },
   refetchInterval: 60000,
 }));

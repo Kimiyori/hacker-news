@@ -9,7 +9,7 @@ export const postId = atomWithDefault<number | null>(() => {
 export const [postData] = atomsWithQuery((get) => ({
   queryKey: ['postItem', get(postId)],
   queryFn: async ({ queryKey: [, id] }): Promise<postDataProps> => {
-    const response = await fetch(`http://localhost:8000/posts/item/${id}`);
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/posts/item/${id}`);
     if (response.ok) {
       return await response.json();
     }

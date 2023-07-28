@@ -15,4 +15,6 @@ export type postCommentsProps = {
   parent: number;
   text: string;
   time: number;
+  dead?: boolean;
+  deleted?: boolean;
 };

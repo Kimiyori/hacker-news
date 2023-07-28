@@ -1,6 +1,7 @@
-import { Box, Button, Typography, styled } from '@mui/material';
+import { Box, Typography, styled } from '@mui/material';
 import { FC } from 'react';
 import { FallbackProps } from 'react-error-boundary';
+import StyledLink from 'components/core/Link/Link';
 
 const Fallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
   return (
@@ -11,7 +12,9 @@ const Fallback: FC<FallbackProps> = ({ error, resetErrorBoundary }) => {
       <Typography variant="h6" color="text.secondary">
         {error.message}
       </Typography>
-      <Button onClick={resetErrorBoundary}>Try again</Button>
+      <StyledLink onClick={resetErrorBoundary} url="/">
+        Back
+      </StyledLink>
     </StyledBox>
   );
 };

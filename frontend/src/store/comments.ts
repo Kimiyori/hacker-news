@@ -12,9 +12,13 @@ export const useFetchComments = (comments: number[]) => {
         queryKey: ['comments', comments, get(refreshComments)],
         queryFn: async ({ queryKey: [, idsList] }): Promise<postCommentsProps[]> => {
           const data = await Promise.all(
-            (idsList as number[]).map((id) => fetch(`http://localhost:8000/posts/item/${id}`).then((y) => y.json())),
+            (idsList as number[]).map((id) =>
+              fetch(`${process.env.REACT_APP_BACKEND_URL}/posts/item/${id}`).then((y) => y.json()),
+            ),
           );
-          return data;
+          return data.filter((comment) => {
+            return !(comment.dead || comment.deleted);
+          });
         },
         refetchInterval: 60000,
       })),
