@@ -11,12 +11,12 @@ const testCommentsList = mockComments(testCommentsListIds.length);
 const testCommentsListFirstCommChilds = mockComments(testCommentsList[0].kids.length);
 const server = setupServer(
   ...testCommentsListIds.map((id, index) =>
-    rest.get(`http://localhost:8000/posts/item/${id}`, (_, res, ctx) => {
+    rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/item/${id}`, (_, res, ctx) => {
       return res(ctx.json(testCommentsList[index]));
     }),
   ),
   ...testCommentsList[0].kids.map((id, index) =>
-    rest.get(`http://localhost:8000/posts/item/${id}`, (_, res, ctx) => {
+    rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/item/${id}`, (_, res, ctx) => {
       return res(ctx.json(testCommentsListFirstCommChilds[index]));
     }),
   ),

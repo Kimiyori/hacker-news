@@ -1,14 +1,15 @@
-import { Container, Typography } from '@mui/material';
-import { useAtomValue } from 'jotai';
+import { Button, Container, Typography } from '@mui/material';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { handlePostTime } from 'utils/time';
-import { UpdateCommentsButton } from 'components/shared/PostInfo/PostInfo.elements';
 import CommentList from 'components/feature/CommentsList/CommentList';
 import { postData } from 'store/postItem';
 import { FC } from 'react';
 import { StyledBoxSrapper, StyledLinkPostUrl, StylesBoxMainPostData } from './PostInfo.styles';
+import { refreshComments } from 'store/comments';
 
 const PostInfo: FC = () => {
   const postDataValue = useAtomValue(postData);
+  const updateComments = useSetAtom(refreshComments);
   return (
     <Container sx={{ color: 'primary.main' }}>
       <StyledBoxSrapper>
@@ -36,12 +37,8 @@ const PostInfo: FC = () => {
               No Comments
             </Typography>
           )}
-          {postDataValue.kids?.length && (
-            <>
-              <UpdateCommentsButton />
-              <CommentList comments={postDataValue.kids} />
-            </>
-          )}
+          <Button onClick={() => updateComments(Math.random())}>Update comments</Button>
+          {postDataValue.kids?.length && <CommentList comments={postDataValue.kids} />}
         </StylesBoxMainPostData>
       </StyledBoxSrapper>
     </Container>

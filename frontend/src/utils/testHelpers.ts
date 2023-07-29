@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { convertToMs } from './time';
-export const mockPost = () => {
+export const mockPost = (kids = true) => {
   return {
     by: faker.person.fullName(),
     id: faker.number.int(),
@@ -8,17 +8,18 @@ export const mockPost = () => {
     time: convertToMs(faker.date.past().getTime()),
     title: faker.lorem.sentence(5),
     url: faker.internet.url(),
-    kids: faker.helpers.multiple(faker.number.int, { count: faker.number.int({ max: 20 }) }),
+    kids: kids ? faker.helpers.multiple(faker.number.int, { count: faker.number.int({ max: 20 }) }) : [],
+    descendants: faker.number.int(),
   };
 };
 export const mockPosts = (count = 20) => {
   return faker.helpers.multiple(mockPost, { count: count });
 };
-export const mockComment = () => {
+export const mockComment = (kids = true) => {
   return {
     by: faker.person.fullName(),
     id: faker.number.int(),
-    kids: faker.helpers.multiple(faker.number.int, { count: faker.number.int({ min: 1, max: 2 }) }),
+    kids: kids ? faker.helpers.multiple(faker.number.int, { count: faker.number.int({ min: 1, max: 2 }) }) : [],
     parent: faker.number.int(),
     text: faker.lorem.words({ min: 2, max: 20 }),
     time: convertToMs(faker.date.past().getTime()),

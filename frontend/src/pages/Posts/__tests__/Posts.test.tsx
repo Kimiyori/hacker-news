@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { BrowserRouter } from 'react-router-dom';
 
 const server = setupServer();
-jest.spyOn(console, 'error').mockImplementation(() => null);
+
 beforeAll(() => server.listen());
 
 afterEach(() => server.resetHandlers());
@@ -16,7 +16,7 @@ afterAll(() => server.close());
 describe('rendering', () => {
   test('correct render', async () => {
     server.use(
-      rest.get(`http://localhost:8000/posts/${1}`, (_, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/${1}`, (_, res, ctx) => {
         return res(ctx.json(mockPosts(20)));
       }),
     );
@@ -25,27 +25,11 @@ describe('rendering', () => {
     expect(screen.getAllByTestId(/skeletonPost/i)).toHaveLength(18);
     expect(await screen.findAllByTestId(/itemPost/i)).toHaveLength(20);
   });
-  // test('render on error', async () => {
-  // console.error = jest.fn();
-  //   server.use(
-  //     rest.get(`http://localhost:8000/posts/${1}`, (_, res, ctx) => {
-  //       return res(
-  //         ctx.status(503),
-  //         ctx.json({
-  //           errorMessage: 'Error',
-  //         }),
-  //       );
-  //     }),
-  //   );
-
-  //   render(<PostsListPage />);
-  //   expect(screen.getByText(/Something went wrong/i)).toBeVisible();
-  // });
 });
 describe('action', () => {
   test('click on update button', async () => {
     server.use(
-      rest.get(`http://localhost:8000/posts/${1}`, (_, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/${1}`, (_, res, ctx) => {
         return res(ctx.json(mockPosts(20)));
       }),
     );
@@ -54,7 +38,7 @@ describe('action', () => {
     const user = userEvent.setup();
     expect(await screen.findAllByTestId(/itemPost/i)).toHaveLength(20);
     server.use(
-      rest.get(`http://localhost:8000/posts/${1}`, (_, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/${1}`, (_, res, ctx) => {
         return res(ctx.json(mockPosts(40)));
       }),
     );

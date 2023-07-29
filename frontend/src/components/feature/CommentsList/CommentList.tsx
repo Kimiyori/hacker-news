@@ -9,7 +9,6 @@ const CommentList: FC<{ comments: number[] }> = ({ comments }) => {
   return (
     <Suspense fallback={<CommentListSkeleton />}>
       <TreeView
-        aria-label="rich object"
         defaultCollapseIcon={<ExpandLessIcon />}
         defaultExpanded={['root']}
         defaultExpandIcon={<ExpandMoreIcon />}
