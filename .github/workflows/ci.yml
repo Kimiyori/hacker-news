@@ -22,18 +22,18 @@ jobs:
           echo "${{ secrets.ENV_FILE }}" > frontend/.env
           docker-compose  -f docker-compose.dev.yml up --exit-code-from test_backend test_backend
   frontend-test:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: Run frontend tests
-          run: |
-            echo "${{ secrets.ENV_FILE }}" > frontend/.env
-            docker-compose  -f docker-compose.dev.yml up --exit-code-from test_frontend test_frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run frontend tests
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > frontend/.env
+          docker-compose  -f docker-compose.dev.yml up --exit-code-from test_frontend test_frontend
   frontend-lint:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: Run frontend linter
-          run: |
-            echo "${{ secrets.ENV_FILE }}" > frontend/.env
-            docker-compose  -f docker-compose.dev.yml up --exit-code-from lint_frontend lint_frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run frontend linter
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > frontend/.env
+          docker-compose  -f docker-compose.dev.yml up --exit-code-from lint_frontend lint_frontend

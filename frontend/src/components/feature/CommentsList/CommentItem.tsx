@@ -15,9 +15,11 @@ const CommentItem: FC<{ comments: number[] }> = ({ comments }) => {
       {fetchedComments.map((comment) => {
         return (
           <StyledTreeItem key={comment.id} nodeId={String(comment.id)} label={<CommentText text={comment.text} />}>
-            <Suspense fallback={<CommentBlockSkeleton />}>
-              {comment.kids ? <CommentItem comments={comment.kids} /> : null}
-            </Suspense>
+            {comment.kids?.length && (
+              <Suspense fallback={<CommentBlockSkeleton />}>
+                <CommentItem comments={comment.kids} />
+              </Suspense>
+            )}
           </StyledTreeItem>
         );
       })}

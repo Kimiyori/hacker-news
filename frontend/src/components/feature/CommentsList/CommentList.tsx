@@ -15,7 +15,7 @@ const CommentList: FC<{ comments: number[] }> = ({ comments }) => {
         defaultExpandIcon={<ExpandMoreIcon />}
         sx={{ textAlign: 'right', width: '100%' }}
       >
-        {comments.length && <CommentsItem comments={comments} />}
+        <CommentsItem comments={comments} />
       </TreeView>
     </Suspense>
   );

@@ -36,7 +36,7 @@ const PostInfo: FC = () => {
               No Comments
             </Typography>
           )}
-          {postDataValue.kids && (
+          {postDataValue.kids?.length && (
             <>
               <UpdateCommentsButton />
               <CommentList comments={postDataValue.kids} />

@@ -5,7 +5,7 @@ import { StyledCard, StyledCardContent, StyledTitle, TimeTypo } from 'components
 import Box from '@mui/material/Box';
 import { useSetAtom } from 'jotai';
 import { postId } from 'store/postItem';
-import StyledLink from '../Link/Link';
+import StyledLink from 'components/core/Link/Link';
 
 type PostCardProps = {
   id: number;
