@@ -1,4 +1,4 @@
-import { Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container, Divider, Typography } from '@mui/material';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { handlePostTime } from 'utils/time';
 import CommentList from 'components/feature/CommentsList/CommentList';
@@ -28,17 +28,30 @@ const PostInfo: FC = () => {
           <Typography sx={{ opacity: 0.5 }} variant="h4">
             Author: {postDataValue.by}
           </Typography>
-          {postDataValue.descendants ? (
-            <Typography sx={{ opacity: 0.5 }} variant="h4">
-              Total comments: {postDataValue.descendants}
-            </Typography>
-          ) : (
-            <Typography sx={{ opacity: 0.5 }} variant="h4">
-              No Comments
-            </Typography>
+          <Box
+            sx={
+              postDataValue.descendants
+                ? { display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between', width: '100%' }
+                : { width: '100%', textAlign: 'right' }
+            }
+          >
+            {postDataValue.descendants ? (
+              <Typography sx={{ opacity: 0.5 }} variant="h4">
+                Total comments: {postDataValue.descendants}
+              </Typography>
+            ) : (
+              <Typography sx={{ opacity: 0.5 }} variant="h4">
+                No Comments
+              </Typography>
+            )}
+            <Button onClick={() => updateComments(Math.random())}>Update comments</Button>
+          </Box>
+          {postDataValue.kids?.length && (
+            <>
+              <Divider />
+              <CommentList comments={postDataValue.kids} />
+            </>
           )}
-          <Button onClick={() => updateComments(Math.random())}>Update comments</Button>
-          {postDataValue.kids?.length && <CommentList comments={postDataValue.kids} />}
         </StylesBoxMainPostData>
       </StyledBoxSrapper>
     </Container>
