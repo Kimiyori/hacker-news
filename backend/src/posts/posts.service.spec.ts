@@ -6,7 +6,7 @@ import { rest } from 'msw';
 
 import { faker } from '@faker-js/faker';
 import { mockPost, mockPosts } from '../utils/testHelpers';
-import { HttpException } from '@nestjs/common';
+import { HttpException, NotFoundException } from '@nestjs/common';
 const server = setupServer();
 beforeAll(() => server.listen());
 
@@ -83,6 +83,14 @@ describe('PostsService', () => {
         }),
       );
       await expect(service.findItem(1)).rejects.toThrowError(HttpException);
+    });
+    test('case when item does not exist', async () => {
+      server.use(
+        rest.get(`https://hacker-news.firebaseio.com/v0/item/${1}.json`, (_, res, ctx) => {
+          return res(ctx.status(200), ctx.json(null));
+        }),
+      );
+      await expect(service.findItem(1)).rejects.toThrowError(NotFoundException);
     });
   });
 });
