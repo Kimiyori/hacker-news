@@ -31,19 +31,20 @@ const PostInfo: FC = () => {
           <Box
             sx={
               postDataValue.descendants
-                ? { display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between', width: '100%' }
+                ? {
+                    display: 'flex',
+                    flexDirection: { xs: 'column', md: 'row-reverse' },
+                    justifyContent: 'space-between',
+                    width: '100%',
+                    alignItems: 'flex-end',
+                  }
                 : { width: '100%', textAlign: 'right' }
             }
           >
-            {postDataValue.descendants ? (
-              <Typography sx={{ opacity: 0.5 }} variant="h4">
-                Total comments: {postDataValue.descendants}
-              </Typography>
-            ) : (
-              <Typography sx={{ opacity: 0.5 }} variant="h4">
-                No Comments
-              </Typography>
-            )}
+            <Typography sx={{ opacity: 0.5, fontSize: { xs: 24, md: 32 }, textAlign: 'right' }} variant="h4">
+              {postDataValue.descendants ? `Total comments: ${postDataValue.descendants}` : 'No Comments'}
+            </Typography>
+
             <Button onClick={() => updateComments(Math.random())}>Update comments</Button>
           </Box>
           {postDataValue.kids?.length && (

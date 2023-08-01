@@ -3,7 +3,16 @@ import { FC } from 'react';
 
 export const CommentBlockSkeleton: FC = () => {
   return (
-    <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', flexWrap: 'wrap' }}>
+    <Box
+      sx={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        flexWrap: 'wrap',
+        gap: 1,
+      }}
+    >
       <Skeleton sx={{ width: '75%' }} />
       <Skeleton sx={{ width: '50%' }} />
       <Skeleton sx={{ width: '50%' }} />

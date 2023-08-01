@@ -7,6 +7,7 @@ import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { styled } from '@mui/material/styles';
 import { FC } from 'react';
 import StyledLink from 'components/core/Link/Link';
+import { Typography } from '@mui/material';
 
 const Header: FC = () => {
   return (
@@ -16,7 +17,9 @@ const Header: FC = () => {
           <IconButton edge="start" color="inherit" sx={{ mr: 2 }}>
             <NewspaperIcon />
           </IconButton>
-          <StyledLink url="/">Hacker News</StyledLink>
+          <StyledLink url="/">
+            <Typography variant="h6">Hacker News</Typography>
+          </StyledLink>
         </Toolbar>
       </StyledHeader>
     </StyledHeaderBox>
@@ -31,7 +34,8 @@ const StyledHeader = styled(AppBar)<AppBarProps>({
 });
 const StyledHeaderBox = styled(Box)<BoxProps>(({ theme }) => ({
   flexGrow: 1,
+  marginBottom: 10,
   [theme.breakpoints.up('md')]: {
-    marginBottom: 10,
+    marginBottom: 50,
   },
 }));

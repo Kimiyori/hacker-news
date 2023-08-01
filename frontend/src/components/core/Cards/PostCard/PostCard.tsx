@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography';
 import { FC } from 'react';
 import { time2TimeAgo } from 'utils/time';
-import { StyledCard, StyledCardContent, StyledTitle, TimeTypo } from 'components/core/Cards/PostCard.styles';
+import { StyledCard, StyledCardContent, StyledTitle, TimeTypo } from 'components/core/Cards/PostCard/PostCard.styles';
 import Box from '@mui/material/Box';
 import { useSetAtom } from 'jotai';
 import { postId } from 'store/postItem';

@@ -2,10 +2,6 @@ import { PaginationItem, PaginationItemProps, styled, alpha } from '@mui/materia
 import Stack, { StackProps } from '@mui/material/Stack';
 
 export const StyledStackPagination = styled(Stack)<StackProps>(({ theme }) => ({
-  position: 'fixed',
-  left: '50%',
-  top: '90%',
-  transform: 'translate(-50%,-50%)',
   width: 350,
   [theme.breakpoints.up('md')]: {
     width: 500,

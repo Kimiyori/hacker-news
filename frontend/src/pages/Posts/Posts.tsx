@@ -4,7 +4,7 @@ import PostsListSkeleton from 'components/shared/PostList/Post.List.skeleton';
 import PaginationRounded from 'components/feature/Pagination/Pagination';
 import { refreshDataToggle } from 'store/postList';
 import { useSetAtom } from 'jotai';
-import { StyledButton, StyledContainer } from 'pages/Posts/Posts.styles';
+import { StyledBox, StyledButton, StyledContainer } from 'pages/Posts/Posts.styles';
 import { ErrorBoundary } from 'react-error-boundary';
 import Fallback from 'components/feature/ErrorFallback/ErrorFallback';
 import { Box, Stack } from '@mui/material';
@@ -30,13 +30,14 @@ const PostsListPage = () => {
             </Suspense>
           </Stack>
         </Box>
-        <PaginationRounded />
-        <StyledButton onClick={() => updateNews(Math.random())} variant="contained">
-          Update news
-        </StyledButton>
+        <StyledBox>
+          <PaginationRounded />
+          <StyledButton onClick={() => updateNews(Math.random())} variant="contained">
+            Update news
+          </StyledButton>
+        </StyledBox>
       </ErrorBoundary>
     </StyledContainer>
   );
 };
-
 export default PostsListPage;

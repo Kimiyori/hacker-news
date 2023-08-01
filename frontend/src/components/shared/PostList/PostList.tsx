@@ -1,4 +1,4 @@
-import PostCard from 'components/core/Cards/PostCard';
+import PostCard from 'components/core/Cards/PostCard/PostCard';
 import { postListData } from 'store/postList';
 import { useAtomValue } from 'jotai';
 import { FC } from 'react';
