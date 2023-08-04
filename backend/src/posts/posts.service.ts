@@ -1,51 +1,46 @@
 import { HttpService } from '@nestjs/axios';
-import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
-import { AxiosError } from 'axios';
-import { catchError, firstValueFrom } from 'rxjs';
-import { PostCommentsProps, PostEntity } from 'posts/entities/post.entity';
-import { hackerUrl } from '../utils/const';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { PostCompactEntity, ItemEntity } from 'posts/entities/post.entity';
+import { typeMapping } from '../utils/const';
+import { fetchData, getSubset } from '../utils/helpers';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PostsService {
-  constructor(private readonly httpService: HttpService) {}
-  fetchData = async <T>(url: string) => {
-    const { data } = await firstValueFrom(
-      this.httpService.get<T>(url).pipe(
-        catchError((error: AxiosError) => {
-          throw new HttpException(
-            {
-              status: error.response.status,
-              error: error.response.data,
-            },
-            error.response.status,
-            {
-              cause: error,
-            },
-          );
-        }),
-      ),
+  constructor(private readonly httpService: HttpService, private configService: ConfigService) {}
+
+  async findPage(page: number): Promise<PostCompactEntity[]> {
+    const listPosts = await fetchData<number[]>(
+      this.httpService,
+      `${this.configService.get<string>('HACKER_API_DOMAIN')}/newstories.json`,
     );
-    return data;
-  };
-  async findPage(page: number): Promise<Omit<PostEntity, 'descendants' | 'url' | 'type' | 'kids'>[]> {
-    const listPosts = await this.fetchData<number[]>(`${hackerUrl}/newstories.json`);
     const data = await Promise.all(
       listPosts
         .slice((page - 1) * 100, page * 100)
-        .map((id) => this.fetchData<PostEntity>(`${hackerUrl}/item/${id}.json`)),
+        .map((id) =>
+          fetchData<ItemEntity>(
+            this.httpService,
+            `${this.configService.get<string>('HACKER_API_DOMAIN')}/item/${id}.json`,
+          ),
+        ),
     );
-    return data.map(({ by, id, score, time, title }) => {
-      return { by, id, score, time, title };
-    });
+    return data.map((newsItem) => getSubset(newsItem, ['by', 'id', 'score', 'time', 'title']));
   }
-  async findItem(id: number): Promise<PostEntity | PostCommentsProps> {
-    const post = await this.fetchData<PostEntity | PostCommentsProps>(`${hackerUrl}/item/${id}.json`);
-    if (!post) {
+  async findItem(id: number, type: string): Promise<Partial<ItemEntity>> {
+    const item = await fetchData<ItemEntity>(
+      this.httpService,
+      `${this.configService.get<string>('HACKER_API_DOMAIN')}/item/${id}.json`,
+    );
+    if (!item) {
       throw new NotFoundException('Item not exist', {
         cause: new Error(),
-        description: 'Item not exist',
       });
     }
-    return post;
+    if (item.type !== type) {
+      throw new BadRequestException('Wrong item type', {
+        cause: new Error(),
+      });
+    }
+    return getSubset(item, typeMapping[item.type]);
   }
 }

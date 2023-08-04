@@ -14,7 +14,7 @@ afterAll(() => server.close());
 describe('rendering', () => {
   test('correct render', async () => {
     server.use(
-      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/${1}`, (_, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/page/${1}`, (_, res, ctx) => {
         return res(ctx.json(mockPosts()));
       }),
     );

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-export const mockPost = () => {
+export const mockPost = (type?: string) => {
   return {
     by: faker.person.fullName(),
     descendants: faker.number.int(),
@@ -12,7 +12,7 @@ export const mockPost = () => {
     kids: faker.helpers.multiple(faker.number.int, {
       count: faker.number.int({ max: 20 }),
     }),
-    type: faker.string.sample(5),
+    type: type ? type : faker.string.sample(5),
   };
 };
 export const mockPosts = (count = 20) => {

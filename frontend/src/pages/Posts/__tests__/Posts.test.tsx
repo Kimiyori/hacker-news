@@ -16,7 +16,7 @@ afterAll(() => server.close());
 describe('rendering', () => {
   test('correct render', async () => {
     server.use(
-      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/${1}`, (_, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/page/${1}`, (_, res, ctx) => {
         return res(ctx.json(mockPosts(20)));
       }),
     );
@@ -29,7 +29,7 @@ describe('rendering', () => {
 describe('action', () => {
   test('click on update button', async () => {
     server.use(
-      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/${1}`, (_, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/page/${1}`, (_, res, ctx) => {
         return res(ctx.json(mockPosts(20)));
       }),
     );
@@ -38,7 +38,7 @@ describe('action', () => {
     const user = userEvent.setup();
     expect(await screen.findAllByTestId(/itemPost/i)).toHaveLength(20);
     server.use(
-      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/${1}`, (_, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/page/${1}`, (_, res, ctx) => {
         return res(ctx.json(mockPosts(40)));
       }),
     );

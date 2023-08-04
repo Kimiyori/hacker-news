@@ -6,7 +6,7 @@ import { rest } from 'msw';
 import { BrowserRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 const server = setupServer(
-  rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/item/${NaN}`, (_, res, ctx) => {
+  rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/${NaN}`, (_, res, ctx) => {
     return res(ctx.json(mockPostData));
   }),
 );
@@ -30,7 +30,7 @@ describe('rendering', () => {
   test('correct render without comments', async () => {
     mockPostData.descendants = 0;
     server.use(
-      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/item/${NaN}`, (_, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/${NaN}`, (_, res, ctx) => {
         return res(ctx.json(mockPostData));
       }),
     );
@@ -45,10 +45,10 @@ describe('action', () => {
     render(<PostInfo />, { wrapper: BrowserRouter });
     const user = userEvent.setup();
     server.use(
-      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/item/${NaN}`, (_, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/${NaN}`, (_, res, ctx) => {
         return res(ctx.json(mockPostData));
       }),
-      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/item/${1234567}`, (_, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/posts/comment/${1234567}`, (_, res, ctx) => {
         return res(ctx.json(newComment));
       }),
     );

@@ -13,7 +13,7 @@ export const useFetchComments = (comments: number[]) => {
         queryFn: async ({ queryKey: [, idsList] }): Promise<postCommentsProps[]> => {
           const data = await Promise.all(
             (idsList as number[]).map((id) =>
-              fetch(`${process.env.REACT_APP_BACKEND_URL}/posts/item/${id}`).then((response) => response.json()),
+              fetch(`${process.env.REACT_APP_BACKEND_URL}/posts/comment/${id}`).then((response) => response.json()),
             ),
           );
           return data.filter((comment) => {
