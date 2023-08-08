@@ -1,7 +1,6 @@
 services:
   backend:
-    build:
-      context: ./backend
+    build: ./backend
     command: npm run start:dev
     working_dir: /backend
     volumes:
@@ -13,8 +12,7 @@ services:
       - 8000:8000
     restart: on-failure
   frontend:
-    build:
-      context: ./frontend
+    build: ./frontend
     command: npm start
     ports:
       - 3000:3000
@@ -26,3 +24,11 @@ services:
     env_file:
       - ./frontend/.env
     restart: always
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    restart: always
+    depends_on:
+      - backend
+      - frontend
