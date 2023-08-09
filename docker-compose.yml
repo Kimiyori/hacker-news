@@ -24,11 +24,3 @@ services:
     env_file:
       - ./frontend/.env
     restart: always
-  nginx:
-    build: ./nginx
-    ports:
-      - 80:80
-    restart: always
-    depends_on:
-      - backend
-      - frontend
