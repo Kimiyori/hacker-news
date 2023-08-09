@@ -1,0 +1,19 @@
+services:
+  test_backend:
+    build: ./backend
+    command: bash -c " npm run test"
+    working_dir: /backend
+  lint_backend:
+    build: ./backend
+    command: bash -c " npm run lint"
+    working_dir: /backend
+  test_frontend:
+    build: ./frontend
+    command: bash -c " npm run test-exit"
+    env_file:
+      - ./frontend/.env
+  lint_frontend:
+    build: ./frontend
+    command: bash -c " npm run lint"
+    env_file:
+      - ./frontend/.env
